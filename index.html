@@ -127,18 +127,6 @@
     position: relative;
   }
 
-  /* rough ruled line behind the name */
-  .hero-left::before {
-    content: '';
-    position: absolute;
-    left: 52px;
-    right: 52px;
-    top: 50%;
-    height: 1px;
-    background: var(--border);
-    transform: translateY(-60px);
-  }
-
   .hero-tag {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -236,18 +224,6 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-  }
-
-  .hero-right::before {
-    content: '"';
-    position: absolute;
-    top: 48px;
-    left: 44px;
-    font-family: 'Lora', serif;
-    font-size: 160px;
-    line-height: 1;
-    color: var(--border);
-    pointer-events: none;
   }
 
   .hero-quote {
