@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liz Boxall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Architects Daughter';
+    src: url('ArchitectsDaughter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+<style>
+  :root {
+    --bg: #e8e4e0;
+    --bg2: #dedad5;
+    --bg3: #d2cdc7;
+    --surface: #cecac4;
+    --border: #bbb5ae;
+    --border-strong: #9e9890;
+    --text: #1e1c19;
+    --text-mid: #4a4640;
+    --text-muted: #7a756e;
+
+    /* PRIMARY — moss green */
+    --moss: #4a6741;
+    --moss-mid: #5c7d52;
+    --moss-light: #7a9e70;
+    --moss-pale: #ccd9c9;
+    --moss-wash: #e2eae0;
+
+    /* SECONDARY — petrol blue */
+    --petrol: #2a5c6e;
+    --petrol-mid: #3a7085;
+    --petrol-light: #5a8fa0;
+    --petrol-pale: #c5d9e0;
+    --petrol-wash: #ddeaee;
+
+    /* PUNCH — terracotta, used sparingly */
+    --punch: #b85535;
+    --punch-light: #cc6e50;
+    --punch-pale: #ead9d3;
+    --punch-wash: #f0e4de;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 18px;
+  }
+
+  /* grain texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* =====================
+     NAV
+  ===================== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(232, 228, 224, 0.93);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 15px;
+    color: var(--moss);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--moss); }
+
+  /* =====================
+     HERO
+  ===================== */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding-top: 57px;
+  }
+
+  .hero-left {
+    padding: 80px 52px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* rough ruled line behind the name */
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    left: 52px;
+    right: 52px;
+    top: 50%;
+    height: 1px;
+    background: var(--border);
+    transform: translateY(-60px);
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'Architects Daughter', cursive;
+    font-size: clamp(48px, 5.5vw, 72px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .name-last {
+    color: var(--moss);
+    display: block;
+  }
+
+  .hero-descriptor {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-mid);
+    margin-bottom: 44px;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    transition: all 0.18s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-moss {
+    background: var(--moss);
+    color: #fff;
+  }
+
+  .btn-moss:hover {
+    background: var(--moss-mid);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--petrol);
+    border: 1px solid var(--petrol);
+  }
+
+  .btn-outline:hover {
+    background: var(--petrol-wash);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    background: var(--bg2);
+    border-left: 1px solid var(--border);
+    padding: 80px 52px 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-right::before {
+    content: '"';
+    position: absolute;
+    top: 48px;
+    left: 44px;
+    font-family: 'Lora', serif;
+    font-size: 160px;
+    line-height: 1;
+    color: var(--border);
+    pointer-events: none;
+  }
+
+  .hero-quote {
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--text-mid);
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-quote.scrawl {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 17px;
+    line-height: 2.0;
+    color: var(--text);
+    background: #f0ece5;
+    border: 1px solid var(--border);
+    padding: 32px 36px;
+    position: relative;
+    box-shadow: 2px 3px 12px rgba(0,0,0,0.08), -1px -1px 0 var(--border);
+    transform: rotate(-0.6deg);
+    z-index: 1;
+  }
+
+  /* lined paper effect */
+  .hero-quote.scrawl::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(180,170,155,0.25) 31px,
+      rgba(180,170,155,0.25) 32px
+    );
+    pointer-events: none;
+  }
+
+  /* red margin line */
+  .hero-quote.scrawl::after {
+    content: '';
+    position: absolute;
+    left: 52px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(180,80,60,0.2);
+    pointer-events: none;
+  }
+
+  .hero-quote.scrawl em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--moss);
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 3px;
+  }
+
+  .hero-quote .architects {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    color: var(--moss);
+    display: block;
+    margin-top: 20px;
+  }
+
+  /* =====================
+     SHARED
+  ===================== */
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  section {
+    padding: 96px 52px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 160px;
+  }
+
+  h2 {
+    font-family: 'Architects Daughter', cursive;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  h2 .moss { color: var(--moss); }
+  h2 .petrol { color: var(--petrol); }
+  h2 .punch { color: var(--punch); }
+
+  .section-lead {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-mid);
+    max-width: 600px;
+    margin-bottom: 56px;
+    line-height: 1.8;
+  }
+
+  /* =====================
+     PROBLEMS
+  ===================== */
+  .problems { display: flex; flex-direction: column; gap: 2px; }
+
+  .problem {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 44px 48px;
+    position: relative;
+    transition: background 0.2s, border-color 0.2s;
+    overflow: hidden;
+  }
+
+  .problem::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    transition: width 0.25s;
+  }
+
+  .problem:hover { background: var(--bg2); }
+
+  .problem.p-moss::before { background: var(--moss); }
+  .problem.p-petrol::before { background: var(--petrol); }
+  .problem.p-punch::before { background: var(--punch); }
+  .problem.p-grey::before { background: var(--border-strong); }
+
+  .problem:hover::before { width: 3px; }
+
+  .p-body {}
+
+  .p-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--moss);
+  }
+
+  .p-problem {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .p-solution {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+
+  .p-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 20px;
+  }
+
+  .pill-moss { background: var(--moss-wash); color: var(--moss); border: 1px solid var(--moss-pale); }
+  .pill-petrol { background: var(--petrol-wash); color: var(--petrol); border: 1px solid var(--petrol-pale); }
+  .pill-punch { background: var(--punch-wash); color: var(--punch); border: 1px solid var(--punch-pale); }
+  .pill-grey { background: var(--bg2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* =====================
+     WORK
+  ===================== */
+  .work-list { display: flex; flex-direction: column; }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 56px;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .work-item:first-child { border-top: 1px solid var(--border); }
+
+  .w-meta {}
+
+  .w-org {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .w-role {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+  }
+
+  .w-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+
+  .w-body p {
+    color: var(--text-mid);
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+
+  .w-body p:last-child { margin-bottom: 0; }
+  .w-body strong { color: var(--text); font-weight: 400; }
+
+  .exit-note {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: var(--bg2);
+    border-left: 3px solid var(--border-strong);
+    font-size: 15px;
+    color: var(--text-mid);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  .exit-note strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .exit-note .punch-text { color: var(--punch); font-style: italic; }
+
+  /* =====================
+     CONTACT
+  ===================== */
+  #contact { background: var(--bg); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left p {
+    font-size: 17px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .contact-footnote {
+    margin-top: 24px !important;
+    font-size: 13px !important;
+    font-style: italic;
+    color: var(--text-muted) !important;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    padding: 13px 16px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, textarea:focus { border-color: var(--moss); }
+  input::placeholder, textarea::placeholder { color: var(--text-muted); }
+
+  textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+  /* =====================
+     FOOTER
+  ===================== */
+  footer {
+    background: var(--text);
+    padding: 40px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-name {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    color: var(--bg);
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* =====================
+     ANIMATIONS
+  ===================== */
+  @keyframes up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-descriptor { animation: up 0.5s ease 0.2s both; }
+  .hero-buttons  { animation: up 0.5s ease 0.3s both; }
+
+  /* =====================
+     RESPONSIVE
+  ===================== */
+  @media (max-width: 860px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 90px 24px 48px; }
+    .hero-left::before { display: none; }
+    .hero-right { padding: 40px 24px; border-left: none; border-top: 1px solid var(--border); }
+    section { padding: 64px 24px; }
+    .problem { grid-template-columns: 1fr; gap: 12px; padding: 28px 24px; }
+    .p-num { font-size: 36px; }
+    .work-item { grid-template-columns: 1fr; gap: 20px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Liz Boxall</span>
+  <ul class="nav-links">
+    <li><a href="#problems">Fixes</a></li>
+    <li><a href="#experience">(un)professional experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <h1>Welcome to<span class="name-last">my brain</span></h1>
+    <p class="hero-descriptor">I don't like inefficiencies and things that pretend to be something they're not.</p>
+    <div class="hero-buttons">
+      <a href="#problems" class="btn btn-moss">Tell me more</a>
+      <a href="https://www.linkedin.com/in/elizabeth-boxall" target="_blank" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-quote scrawl">
+      I have been out of formal employment for 13 months. <em>This</em> is what happens when someone who is used to 40-hour work weeks and having something for their brain to sink its teeth into does when there isn't a distraction.
+      <br><br>
+      In my workplaces, I see problem, find problem, fix problem. It turns out — with no job, no money and a lot of thinking time — I also do it in the world.
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-eyebrow">The fixes</div>
+  <h2>Things that <span class="moss">annoyed me</span></h2>
+  <p class="section-lead">My brain sees broken things, gets annoyed and starts building before anyone even asks. At this point, it's probably my biggest asset and most annoying character trait.</p>
+
+  <div class="problems">
+
+    <div class="problem p-petrol">
+      <div class="p-body">
+        <div class="p-tag">The annoyance</div>
+        <p class="p-problem">"AI is screening me out of jobs I'm qualified for and nobody will tell me why."</p>
+        <p class="p-solution">Recruitment systems are optimised for organisations, not people. The accountability buddy concept flips that — HR support that actually serves the employee. Transparency, feedback, human accountability built into the process rather than bolted on as an afterthought.</p>
+        <div class="p-footer">
+          <span class="pill pill-petrol">Seedling</span>
+          <span class="pill pill-moss">HR &amp; Policy</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem p-moss">
+      <div class="p-body">
+        <div class="p-tag">The annoyance</div>
+        <p class="p-problem">"The dog training industry is unregulated, chaotic, and serves itself — not owners."</p>
+        <p class="p-solution">LemonHead is an eLearning platform built around one idea: your dog isn't broken, your dog is different. Not special — different. Evidence-based, behaviour-first training that explains the why, instead of handing you a list of games that work for some dogs and not yours and implying that makes your dog the problem.</p>
+        <div class="p-footer">
+          <span class="pill pill-moss">In progress</span>
+          <span class="pill pill-moss">eLearning</span>
+          <span class="pill pill-moss">Dog behaviour</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem p-punch">
+      <div class="p-body">
+        <div class="p-tag">The annoyance</div>
+        <p class="p-problem">"I want a chore app that works for my specific household."</p>
+        <p class="p-solution">Building Boxby Bux — a two-person chore tracker — led to understanding PWAs, which led to realising native apps are largely a protection racket, which led to The Tinker's SAD: a curated directory of PWAs for people who are tired of handing their phone over to Google and Apple. Mascotted by Cassie, a haunted three-legged merle border collie who just wants to install her apps in peace.</p>
+        <div class="p-footer">
+          <span class="pill pill-moss">Seedling</span>
+          <span class="pill pill-petrol">Open web</span>
+          <span class="pill pill-punch">Anti-corporate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem p-grey">
+      <div class="p-body">
+        <div class="p-tag">The annoyance</div>
+        <p class="p-problem">"My CV doesn't show how I actually think."</p>
+        <p class="p-solution">This website. Built to show the process, not just the outcome. The fact that it exists and that I built it is part of the argument.</p>
+        <div class="p-footer">
+          <span class="pill pill-grey">You're looking at it</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">(un)professional experience</div>
+  <h2>What I actually <span class="moss">did</span></h2>
+  <p class="section-lead">Not what the job description said. What I actually did, why it mattered, and where relevant — why I left.</p>
+
+  <div class="work-list">
+
+    <div class="work-item">
+      <div class="w-meta">
+        <div class="w-org">Royal College of Psychiatrists</div>
+        <div class="w-role">CESR Coordinator</div>
+        <div class="w-dates">2019 — 2022</div>
+      </div>
+      <div class="w-body">
+        <p>When I started, nobody at the organisation cared about CESR. It had been left to rot for years — and it showed. I didn't fix it by being a wizard. I fixed it by caring about the humans involved.</p>
+        <p>I loved that job. I didn't always love the organisation, but I loved the work and the people it was for.</p>
+        <div class="exit-note">
+          <strong>Why I left</strong>
+          After 2.5 years and a pass rate transformation that hadn't been seen in a decade, I received what was framed as a pay rise. My salary moved from £29,897 to £30,000 — because a benchmarking exercise reset the band floor. New starters, including people I was actively training, joined at the same rate. I asked to be placed at the midpoint of the band. HR sat on my job description rewrite for four months without responding. I left in June.
+          <br><br>
+          <span class="punch-text">"Money doesn't bring you job satisfaction" — true. But paying someone the same as a person who started last month after 2.5 years of turning a decade of failure around isn't a pay philosophy. It's a slap dressed as a pay rise.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="w-meta">
+        <div class="w-org">University of the Arts London</div>
+        <div class="w-role">Programme Administration Manager, Fashion</div>
+        <div class="w-dates">2022 — 2023</div>
+      </div>
+      <div class="w-body">
+        <p>UAL had a complicated relationship with its administrative staff. The prevailing culture was one where administrators genuinely believed themselves inferior to the academics — they didn't have ideas, because they didn't think that was their place. Within my first week, more colleagues than I'd ever encountered told me they were <strong>"just a bit of a technophobe"</strong> — which in an administrative role is not a personality trait. It's a gap that someone has decided is acceptable.</p>
+        <p>I did what I do. Found the inefficiencies, learnt the technology needed to fix them, invested real time in the people who'd been overlooked, and wasn't afraid to say what I thought to the people above me. It turned out they quite liked it.</p>
+        <p>I came in knowing very little about fashion. I learnt about it properly — because you cannot contribute meaningfully to a conversation you haven't made the effort to understand.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Get in touch</div>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <h2>Fancy a <span class="petrol">virtual cuppa?</span></h2>
+      <p>If you want to talk, collaborate on any of the projects, pick my brain for something or even hire me, please reach out. I'd love to chat.*</p>
+      <a href="https://www.linkedin.com/in/elizabeth-boxall" target="_blank" class="btn btn-outline">Find me on LinkedIn</a>
+      <p class="contact-footnote">*I really would love to chat. You should be able to tell by the website, I've probably got too much free time.</p>
+    </div>
+    <div class="contact-right">
+      <form name="contact" method="POST" data-netlify="true" class="contact-form">
+        <input type="hidden" name="form-name" value="contact">
+        <div>
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="Who are you?" required>
+        </div>
+        <div>
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="Where should I reply?" required>
+        </div>
+        <div>
+          <label for="message">What's on your mind</label>
+          <textarea id="message" name="message" placeholder="Tell me about the problem..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-moss">Send it →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Liz Boxall</span>
+  <span class="footer-note">Hastings, East Sussex · Open to remote &amp; relocation</span>
+</footer>
+
+</body>
+</html>
