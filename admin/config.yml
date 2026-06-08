@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+
+collections:
+  - name: "fixes"
+    label: "Fixes"
+    folder: "_fixes"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "The annoyance", name: "title", widget: "string" }
+      - { label: "The solution", name: "solution", widget: "text" }
+      - { label: "Colour theme", name: "theme", widget: "select", options: ["moss", "petrol", "punch", "grey"] }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        field: { label: "Tag", name: "tag", widget: "string" }
+
+  - name: "experience"
+    label: "(Un)professional Experience"
+    folder: "_experience"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Organisation", name: "org", widget: "string" }
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Dates", name: "dates", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Why I left (optional)", name: "exit", widget: "text", required: false }
